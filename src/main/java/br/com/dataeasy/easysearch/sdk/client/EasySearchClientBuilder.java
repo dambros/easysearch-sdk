@@ -1,9 +1,9 @@
 package br.com.dataeasy.easysearch.sdk.client;
 
-import br.com.dataeasy.easysearch.sdk.http.RequestHandler;
-import br.com.dataeasy.easysearch.sdk.util.StringUtils;
 import br.com.dataeasy.easysearch.sdk.http.Request;
+import br.com.dataeasy.easysearch.sdk.http.RequestHandler;
 import br.com.dataeasy.easysearch.sdk.model.CredentialsDTO;
+import br.com.dataeasy.easysearch.sdk.util.StringUtils;
 
 public class EasySearchClientBuilder {
 
@@ -34,6 +34,13 @@ public class EasySearchClientBuilder {
         return this;
     }
 
+
+    /**
+     * Build a client and authenticate it with the credentials previously specified. It requires
+     * both credentials and baseUrl to be previously set.
+     *
+     * @return client which allows the use of the API
+     */
     public EasySearchClient build() {
 
         if (this.baseUrl == null) {

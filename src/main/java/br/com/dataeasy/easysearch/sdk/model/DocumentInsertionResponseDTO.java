@@ -11,7 +11,7 @@ public class DocumentInsertionResponseDTO implements ResponseBody {
     private Map<Long, String> successful;
     private List<Long> failed;
     private boolean successfullyCommitted;
-    private String path;
+    private transient String path;
 
     public DocumentInsertionResponseDTO() {
     }

@@ -27,6 +27,12 @@ public class EasySearchClient {
         return this.requestHandler.getAccessToken();
     }
 
+    /**
+     * Authenticate the credentials given. It will set the recovered accessToken as a default header
+     * value which will then be used on all future requests.
+     *
+     * @param credentials api credentials
+     */
     public void authenticate(CredentialsDTO credentials) {
 
         AuthenticationResponseDTO response = (AuthenticationResponseDTO)
