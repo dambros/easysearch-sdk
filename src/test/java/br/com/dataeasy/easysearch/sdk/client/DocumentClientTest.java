@@ -109,7 +109,7 @@ public class DocumentClientTest {
         metadatas.add(nameMeta);
         metadatas.add(linkMeta);
 
-        SchemaDTO schemaDTO = new SchemaDTO(1.0f, new ArrayList<>(), metadatas);
+        SchemaDTO schemaDTO = new SchemaDTO(1.0f, new ArrayList<List<String>>(), metadatas);
 
         SettingsDTO settingsDTO = new SettingsDTO();
         settingsDTO.setStopOnFail(false);
