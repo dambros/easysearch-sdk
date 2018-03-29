@@ -34,7 +34,15 @@ public class EasySearchClientBuilder {
         return this;
     }
 
-    public EasySearchClient build()  {
+    public EasySearchClient build() {
+
+        if (this.baseUrl == null) {
+            throw new IllegalArgumentException("baseUrl cannot be null");
+        }
+
+        if (this.credentials == null) {
+            throw new IllegalArgumentException("credentials cannot be null");
+        }
 
         if (this.requestHandler == null) {
             this.requestHandler = new Request();

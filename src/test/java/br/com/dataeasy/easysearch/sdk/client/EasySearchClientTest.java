@@ -25,10 +25,21 @@ public class EasySearchClientTest {
                 .withRequestHandler(new RequestMock())
                 .build();
 
-        client.authenticate(credentials);
-
+        //client.authenticate() is called during build() call
         assertNotNull(client.getAccessToken());
         assertEquals(client.getClientId(), CLIENT_ID);
 
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+     public void testAuthenticateNullBaseURL() {
+        new EasySearchClientBuilder().build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAuthenticateNullCredentials() {
+        new EasySearchClientBuilder()
+                .withBaseUrl(BASE_URL)
+                .build();
     }
 }
