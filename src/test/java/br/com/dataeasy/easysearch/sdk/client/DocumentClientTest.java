@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,6 +14,8 @@ import java.util.Map;
 import br.com.dataeasy.easysearch.sdk.mock.MockResponseBuilder;
 import br.com.dataeasy.easysearch.sdk.mock.RequestMock;
 import br.com.dataeasy.easysearch.sdk.model.CredentialsDTO;
+import br.com.dataeasy.easysearch.sdk.model.DocumentDeletionDTO;
+import br.com.dataeasy.easysearch.sdk.model.DocumentDeletionResponseDTO;
 import br.com.dataeasy.easysearch.sdk.model.DocumentInsertionDTO;
 import br.com.dataeasy.easysearch.sdk.model.DocumentInsertionResponseDTO;
 import br.com.dataeasy.easysearch.sdk.model.Flag;
@@ -67,7 +70,45 @@ public class DocumentClientTest {
         assertEquals(response.getProcessTime(), expectedResponse.getProcessTime());
         assertEquals(response.getSuccessful(), expectedResponse.getSuccessful());
         assertEquals(response.getPath(), "/api/user/document");
+    }
 
+    @Test
+    public void testSingleDelete() {
+        DocumentDeletionResponseDTO expectedResponse = MockResponseBuilder.buildDocumentDeletionResponse();
+        DocumentClient docClient = this.client.getDocumentClient();
+
+        DocumentDeletionResponseDTO responseNullCollection = docClient.delete(null, "1");
+        assertEquals(responseNullCollection.getPath(), "/api/default/document/1");
+        assertEquals(responseNullCollection.getSuccessful(), expectedResponse.getSuccessful());
+        assertEquals(responseNullCollection.getFailed(), expectedResponse.getFailed());
+        assertEquals(responseNullCollection.getDocumentsLeft(), expectedResponse.getDocumentsLeft());
+
+        DocumentDeletionResponseDTO responseCollection = docClient.delete("user", "1");
+        assertEquals(responseCollection.getPath(), "/api/user/document/1");
+        assertEquals(responseCollection.getSuccessful(), expectedResponse.getSuccessful());
+        assertEquals(responseCollection.getFailed(), expectedResponse.getFailed());
+        assertEquals(responseCollection.getDocumentsLeft(), expectedResponse.getDocumentsLeft());
+    }
+
+    @Test
+    public void testMultipleDelete() {
+        DocumentDeletionResponseDTO expectedResponse = MockResponseBuilder.buildDocumentDeletionResponse();
+        DocumentClient docClient = this.client.getDocumentClient();
+
+        DocumentDeletionDTO deleteDTO = new DocumentDeletionDTO();
+        deleteDTO.setIds(Arrays.asList("doc1, doc2"));
+
+        DocumentDeletionResponseDTO responseNullCollection = docClient.delete(null, deleteDTO);
+        assertEquals(responseNullCollection.getPath(), "/api/default/document");
+        assertEquals(responseNullCollection.getSuccessful(), expectedResponse.getSuccessful());
+        assertEquals(responseNullCollection.getFailed(), expectedResponse.getFailed());
+        assertEquals(responseNullCollection.getDocumentsLeft(), expectedResponse.getDocumentsLeft());
+
+        DocumentDeletionResponseDTO responseCollection = docClient.delete("user", deleteDTO);
+        assertEquals(responseCollection.getPath(), "/api/user/document");
+        assertEquals(responseCollection.getSuccessful(), expectedResponse.getSuccessful());
+        assertEquals(responseCollection.getFailed(), expectedResponse.getFailed());
+        assertEquals(responseCollection.getDocumentsLeft(), expectedResponse.getDocumentsLeft());
     }
 
     private DocumentInsertionDTO createDocList() {

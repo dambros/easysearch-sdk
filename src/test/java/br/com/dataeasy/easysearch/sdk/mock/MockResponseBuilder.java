@@ -4,6 +4,7 @@ package br.com.dataeasy.easysearch.sdk.mock;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.dataeasy.easysearch.sdk.model.DocumentDeletionResponseDTO;
 import br.com.dataeasy.easysearch.sdk.model.DocumentInsertionResponseDTO;
 
 public class MockResponseBuilder {
@@ -21,6 +22,14 @@ public class MockResponseBuilder {
         responseDTO.setSuccessful(map);
 
         return responseDTO;
+    }
+
+    public static DocumentDeletionResponseDTO buildDocumentDeletionResponse() {
+        DocumentDeletionResponseDTO dto = new DocumentDeletionResponseDTO();
+        dto.setDocumentsLeft(0);
+        dto.setFailed(0);
+        dto.setSuccessful(1);
+        return dto;
     }
 
 }
