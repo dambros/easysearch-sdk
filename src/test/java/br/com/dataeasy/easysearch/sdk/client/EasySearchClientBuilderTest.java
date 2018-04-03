@@ -4,10 +4,13 @@ package br.com.dataeasy.easysearch.sdk.client;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import br.com.dataeasy.easysearch.sdk.http.Request;
 import br.com.dataeasy.easysearch.sdk.http.RequestHandler;
-import br.com.dataeasy.easysearch.sdk.model.CredentialsDTO;
 import br.com.dataeasy.easysearch.sdk.mock.RequestMock;
+import br.com.dataeasy.easysearch.sdk.model.CredentialsDTO;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -47,6 +50,17 @@ public class EasySearchClientBuilderTest {
         EasySearchClientBuilder esBuilder = new EasySearchClientBuilder().withRequestHandler(rh);
         assertNotNull(esBuilder.getRequestHandler());
         assertEquals(esBuilder.getRequestHandler(), rh);
+    }
+
+    @Test
+    public void testWithParams() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("maxTotal", "10");
+        params.put("maxPerRoute", "10");
+
+        EasySearchClientBuilder esBuilder = new EasySearchClientBuilder().withParams(params);
+        assertNotNull(esBuilder.getParams());
+        assertEquals(esBuilder.getParams(), params);
     }
 
     @Test

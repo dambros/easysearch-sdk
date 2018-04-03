@@ -1,6 +1,8 @@
 package br.com.dataeasy.easysearch.sdk.client;
 
 
+import java.util.Map;
+
 import br.com.dataeasy.easysearch.sdk.http.HttpMethod;
 import br.com.dataeasy.easysearch.sdk.http.RequestHandler;
 import br.com.dataeasy.easysearch.sdk.model.AuthenticationResponseDTO;
@@ -13,9 +15,9 @@ public class EasySearchClient {
     private RequestHandler requestHandler;
     private DocumentClient documentClient;
 
-    EasySearchClient(String baseUrl, RequestHandler requestHandler) {
+    EasySearchClient(String baseUrl, RequestHandler requestHandler, Map<String, String> params) {
         this.requestHandler = requestHandler;
-        this.requestHandler.init();
+        this.requestHandler.init(params);
         this.requestHandler.setBaseUrl(baseUrl);
     }
 

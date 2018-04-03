@@ -6,7 +6,7 @@
 
     <groupId>br.com.dataeasy</groupId>
     <artifactId>easysearch-sdk</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
 
     <dependencies>

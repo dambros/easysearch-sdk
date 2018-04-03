@@ -1,5 +1,7 @@
 package br.com.dataeasy.easysearch.sdk.mock;
 
+import java.util.Map;
+
 import br.com.dataeasy.easysearch.sdk.http.HttpMethod;
 import br.com.dataeasy.easysearch.sdk.http.RequestHandler;
 import br.com.dataeasy.easysearch.sdk.model.AuthenticationResponseDTO;
@@ -36,7 +38,7 @@ public class RequestMock implements RequestHandler {
     public void setAuthorizationHeaders(CredentialsDTO credentials, String accessToken) {
     }
 
-    public void init() {
+    public void init(Map<String, String> params) {
     }
 
     public String getAccessToken() {

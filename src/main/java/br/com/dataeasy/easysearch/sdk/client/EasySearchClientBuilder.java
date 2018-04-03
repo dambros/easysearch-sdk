@@ -1,5 +1,8 @@
 package br.com.dataeasy.easysearch.sdk.client;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import br.com.dataeasy.easysearch.sdk.http.Request;
 import br.com.dataeasy.easysearch.sdk.http.RequestHandler;
 import br.com.dataeasy.easysearch.sdk.model.CredentialsDTO;
@@ -10,6 +13,7 @@ public class EasySearchClientBuilder {
     private String baseUrl;
     private CredentialsDTO credentials;
     private RequestHandler requestHandler;
+    private Map<String, String> params;
 
     public EasySearchClientBuilder() {
     }
@@ -34,6 +38,10 @@ public class EasySearchClientBuilder {
         return this;
     }
 
+    public EasySearchClientBuilder withParams(Map<String, String> params) {
+        setParams(params);
+        return this;
+    }
 
     /**
      * Build a client and authenticate it with the credentials previously specified. It requires
@@ -55,7 +63,11 @@ public class EasySearchClientBuilder {
             this.requestHandler = new Request();
         }
 
-        EasySearchClient client = new EasySearchClient(this.baseUrl, this.requestHandler);
+        if (this.params == null) {
+            this.params = new HashMap<String, String>();
+        }
+
+        EasySearchClient client = new EasySearchClient(this.baseUrl, this.requestHandler, this.params);
         client.authenticate(this.credentials);
 
         return client;
@@ -73,6 +85,10 @@ public class EasySearchClientBuilder {
         this.requestHandler = requestHandler;
     }
 
+    protected void setParams(Map<String, String> params) {
+        this.params = params;
+    }
+
     public String getBaseUrl() {
         return baseUrl;
     }
@@ -83,5 +99,9 @@ public class EasySearchClientBuilder {
 
     public RequestHandler getRequestHandler() {
         return requestHandler;
+    }
+
+    public Map<String, String> getParams() {
+        return params;
     }
 }

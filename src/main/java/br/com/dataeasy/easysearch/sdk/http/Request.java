@@ -10,6 +10,7 @@ import com.mashape.unirest.request.HttpRequest;
 import com.mashape.unirest.request.HttpRequestWithBody;
 
 import java.net.URL;
+import java.util.Map;
 
 import br.com.dataeasy.easysearch.sdk.config.GsonObjectMapper;
 import br.com.dataeasy.easysearch.sdk.exception.BadRequestException;
@@ -17,9 +18,9 @@ import br.com.dataeasy.easysearch.sdk.exception.InternalServerErrorException;
 import br.com.dataeasy.easysearch.sdk.exception.NotFoundException;
 import br.com.dataeasy.easysearch.sdk.exception.SdkClientException;
 import br.com.dataeasy.easysearch.sdk.exception.UnauthorizedException;
+import br.com.dataeasy.easysearch.sdk.model.CredentialsDTO;
 import br.com.dataeasy.easysearch.sdk.model.RequestBody;
 import br.com.dataeasy.easysearch.sdk.model.ResponseBody;
-import br.com.dataeasy.easysearch.sdk.model.CredentialsDTO;
 
 public class Request implements RequestHandler {
 
@@ -28,9 +29,16 @@ public class Request implements RequestHandler {
     private String accessToken;
     private String clientId;
 
-    public void init() {
+    public void init(Map<String, String> params) {
         Unirest.setObjectMapper(new GsonObjectMapper());
         Unirest.setDefaultHeader("Content-Type", "application/json");
+
+        if(params.containsKey("maxTotal") && params.containsKey("maxPerRoute")) {
+            int maxTotal = Integer.parseInt(params.get("maxTotal"));
+            int maxPerRoute = Integer.parseInt(params.get("maxPerRoute"));
+            Unirest.setConcurrency(maxTotal, maxPerRoute);
+        }
+
         gson = new GsonBuilder().disableHtmlEscaping().create();
     }
 
