@@ -7,7 +7,7 @@
     <groupId>br.com.dataeasy</groupId>
     <artifactId>easysearch-sdk</artifactId>
     <version>0.0.1</version>
-
+    <packaging>jar</packaging>
 
     <dependencies>
 
@@ -34,6 +34,7 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>2.8.9</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
