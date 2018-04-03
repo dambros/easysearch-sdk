@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.dataeasy</groupId>
-    <artifactId>easysearch-sdk</artifactId>
+    <artifactId>easysearch-sdk-java</artifactId>
     <version>0.0.2</version>
     <packaging>jar</packaging>
 
